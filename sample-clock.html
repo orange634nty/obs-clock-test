@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            width: 90px;
+            height: 60px;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(1, 1, 1, 0);
+        }
+        p {
+            margin: 0;
+        }
+        #hour-min-text {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <p id="hour-min-text">00:00</p>
+        <p>
+            <span id="date-text">00/00</span>
+            <span id="weekday-text">Sun</span>
+        </p>
+    </div>
+
+    <script>
+        // 時計更新用メソッド
+        const update_clock = () => {
+            // 現在時刻等を取得
+            const now = new Date();
+            const month = ("00" + (now.getMonth() + 1)).slice(-2);
+            const day = ("00" + now.getDate()).slice(-2);
+            const hour = ("00" + now.getHours()).slice(-2);
+            const min = ("00" + now.getMinutes()).slice(-2);
+            const week = now.getDay();
+            const week_name = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][week];
+
+            // 表示の更新
+            const hour_min_element = document.getElementById("hour-min-text");
+            hour_min_element.innerHTML = `${hour}:${min}`;
+            const date_text_element = document.getElementById("date-text");
+            date_text_element.innerHTML = `${month}/${day}`;
+            const weekday_text_element = document.getElementById("weekday-text");
+            weekday_text_element.innerHTML = week_name;
+        };
+
+        // インターバルを設定する
+        setInterval(update_clock, 1000);
+    </script>
+</body>
+</html>
